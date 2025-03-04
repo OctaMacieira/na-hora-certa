@@ -1,5 +1,5 @@
-from ..Models.room import Room
-from ..Repository.roomDb import *
+from api.Models.room import Room
+from api.Repository.roomDb import *
 
 
 def create_new_room(data):

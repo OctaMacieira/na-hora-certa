@@ -1,7 +1,6 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_restful import Api
 from flasgger import Swagger
-from json import json
 from Service.room_service import *
 
 
@@ -21,11 +20,11 @@ swagger = Swagger(app)
 @app.route("/create-new-room", methods=["POST"])
 def create_new_room():
     """
-    Retorna o status da Pool
+    Create a new room in the Database
     ---
     responses:
       200:
-        description: Status da pool de mineracao
+        description: Room created successfully
     """
     if request.is_json:
       data = request.get_json()
@@ -33,17 +32,17 @@ def create_new_room():
       print("Request is not JSON")
 
     room_register = create_new_room(data)
-    return True
+    return room_register
 
 
-@app.route("/update-room", methods=["UPDATE"])
+@app.route("/update-room", methods=["PUT"])
 def update_room():
     """
-     Retorna o Saldo da Conta
+     Update an existing room in the Database
     ---
     responses:
       200:
-        description: Saldo da Conta
+        description: Room successfully updated
     """
     if request.is_json:
       data = request.get_json()
@@ -51,17 +50,17 @@ def update_room():
       print("Request is not JSON")
 
     room_update = update_room(data)
-    return True
+    return room_update
 
 
 @app.route("/delete-room", methods=["DELETE"])
 def delete_room():
     """
-      Retorna a taxa de hash total da conta
+      Delete an existing room in the Database
     ---
     responses:
       200:
-        description: Taxa de hash total da conta
+        description: Room successfully deleted
     """
     if request.is_json:
       data = request.get_json()
@@ -69,7 +68,7 @@ def delete_room():
       print("Request is not JSON")
     
     room_delete = delete_room(data)
-    return True
+    return room_delete
 
 
 if __name__ == "__main__":
