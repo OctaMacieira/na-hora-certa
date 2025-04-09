@@ -3,7 +3,6 @@ from api.Repository.roomDb import *
 
 
 def create_new_room(data):
-    
     new_room = Room(
     zip_code = data['zip_code'],
     address = data['address'],
@@ -17,11 +16,9 @@ def create_new_room(data):
     doctors_office = data['doctors_office']
     )
 
-    create_new_room_in_db(new_room)
-    return True
+    return create_new_room_in_db(new_room)
 
 def update_room(data):
-    
     update_room = Room(
     id = data['id'],
     zip_code = data['zip_code'],
@@ -36,12 +33,9 @@ def update_room(data):
     doctors_office = data['doctors_office']
     )
 
-    update_room_in_db(update_room)
-    return True
+    return update_room_in_db(update_room)
 
 def delete_room(data):
-
     delete_room = Room(id = data['id'])
 
-    delete_room_in_db(delete_room)
-    return True
+    return delete_room_in_db(delete_room)

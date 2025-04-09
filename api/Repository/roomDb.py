@@ -5,7 +5,7 @@ from api.Models.room import Room
 
 # Define the SQLAlchemy base and engine
 Base = declarative_base()
-engine = create_engine('sqlite:///rooms.db')
+engine = create_engine('sqlite:///na-hora-certa.db')
 Session = sessionmaker(bind=engine)
 
 # Define the Room model using SQLAlchemy
