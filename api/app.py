@@ -94,7 +94,12 @@ def cadastrar_nova_sala():
     else:
       print("Request is not JSON")
 
-    return create_new_room(data)
+    result = create_new_room(data)
+
+    if isinstance(result, int):
+        return jsonify({"message": "Room created successfully", "room_id": result}), 200
+    else:
+        return jsonify({"error": "Failed to create room"}), 500
 
 
 @app.route("/update-room", methods=["PUT"])
@@ -174,7 +179,12 @@ def alterar_sala():
     else:
       print("Request is not JSON")
 
-    return update_room(data)
+    result = update_room(data)
+
+    if isinstance(result, int):
+        return jsonify({"message": "Room updated successfully", "room_id": result}), 200
+    else:
+        return jsonify({"error": "Failed to update room"}), 500
 
 
 @app.route("/delete-room", methods=["DELETE"])
@@ -204,7 +214,12 @@ def deletar_sala():
     else:
       print("Request is not JSON")
     
-    return delete_room(data)
+    result = delete_room(data)
+
+    if isinstance(result, int):
+        return jsonify({"message": "Room deleted successfully", "room_id": result}), 200
+    else:
+        return jsonify({"error": "Failed to delete room"}), 500
 
 
 if __name__ == "__main__":

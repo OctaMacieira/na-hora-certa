@@ -16,7 +16,9 @@ def create_new_room(data):
     doctors_office = data['doctors_office']
     )
 
-    return create_new_room_in_db(new_room)
+    roomId = create_new_room_in_db(new_room)
+
+    return roomId
 
 def update_room(data):
     update_room = Room(
@@ -33,7 +35,9 @@ def update_room(data):
     doctors_office = data['doctors_office']
     )
 
-    return update_room_in_db(update_room)
+    roomId = update_room_in_db(update_room)
+
+    return roomId
 
 def delete_room(data):
     delete_room = Room(id = data['id'])
