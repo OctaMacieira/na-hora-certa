@@ -3,12 +3,11 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from api.Models.room import Room
 
-# Define the SQLAlchemy base and engine
 Base = declarative_base()
 engine = create_engine('sqlite:///na-hora-certa.db')
 Session = sessionmaker(bind=engine)
 
-# Define the Room model using SQLAlchemy
+# Model de Room pelo SQLAlchemy
 class Room(Base):
     __tablename__ = 'rooms'
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -24,7 +23,6 @@ class Room(Base):
     doctors_office = Column(Boolean, nullable=False)
 
 def initialize_database():
-    # Create the tables in the database
     Base.metadata.create_all(engine)
 
 def create_new_room_in_db(room):
@@ -48,6 +46,5 @@ def get_last_10_rooms_in_db():
     session.close()
     return rooms
 
-# Initialize the database when the module is run
 if __name__ == "__main__":
     initialize_database()
