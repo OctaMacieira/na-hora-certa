@@ -35,33 +35,18 @@ def create_new_room_in_db(room):
     session.close()
     return room_id
 
-def update_room_in_db(room):
-    session = Session()
-    existing_room = session.query(Room).filter_by(id=room.id).first()
-    if existing_room:
-        existing_room.zip_code = room.zip_code
-        existing_room.address = room.address
-        existing_room.size = room.size
-        existing_room.documents_ok = room.documents_ok
-        existing_room.condominium_fee = room.condominium_fee
-        existing_room.iptu = room.iptu
-        existing_room.number_of_bathrooms = room.number_of_bathrooms
-        existing_room.has_parking_space = room.has_parking_space
-        existing_room.has_reception = room.has_reception
-        existing_room.doctors_office = room.doctors_office
-        session.commit()
-        rowcount = 1
-    else:
-        rowcount = 0
-    session.close()
-    return rowcount
-
 def delete_room_in_db(room):
     session = Session()
     rowcount = session.query(Room).filter_by(id=room.id).delete()
     session.commit()
     session.close()
     return rowcount
+
+def get_last_10_rooms_in_db():
+    session = Session()
+    rooms = session.query(Room).order_by(Room.id.desc()).limit(10).all()
+    session.close()
+    return rooms
 
 # Initialize the database when the module is run
 if __name__ == "__main__":
