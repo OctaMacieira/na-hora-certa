@@ -26,6 +26,15 @@ def delete_room(data):
 
     return delete_room_in_db(delete_room)
 
+def update_room(room_id, data):
+    updatable_fields = {
+        'zip_code', 'address', 'size', 'documents_ok',
+        'condominium_fee', 'iptu', 'number_of_bathrooms',
+        'has_parking_space', 'has_reception', 'doctors_office'
+    }
+    filtered_data = {k: v for k, v in data.items() if k in updatable_fields}
+    return update_room_in_db(room_id, filtered_data)
+
 def get_last_10_rooms():
 
     rooms = get_last_10_rooms_in_db()

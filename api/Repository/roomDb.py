@@ -40,6 +40,19 @@ def delete_room_in_db(room):
     session.close()
     return rowcount
 
+def update_room_in_db(room_id, data):
+    session = Session()
+    room = session.query(Room).filter_by(id=room_id).first()
+    if room is None:
+        session.close()
+        return None
+    for key, value in data.items():
+        if hasattr(room, key):
+            setattr(room, key, value)
+    session.commit()
+    session.close()
+    return room_id
+
 def get_last_10_rooms_in_db():
     session = Session()
     rooms = session.query(Room).order_by(Room.id.desc()).limit(10).all()

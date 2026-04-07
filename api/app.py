@@ -104,6 +104,83 @@ def cadastrar_nova_sala():
         return jsonify({"error": "Failed to create room"}), 500
 
 
+@app.route("/update-room/<int:room_id>", methods=["PUT"])
+def atualizar_sala(room_id):
+    """
+    Atualiza os dados de uma sala existente no banco de dados
+    ---
+    parameters:
+      - name: room_id
+        in: path
+        required: true
+        type: integer
+        description: ID da sala a ser atualizada
+        example: 1
+      - name: body
+        in: body
+        required: true
+        schema:
+          properties:
+            zip_code:
+              type: string
+              description: CEP da Sala
+              example: "12345-678"
+            address:
+              type: string
+              description: Endereço da Sala
+              example: "Rua Exemplo, 123"
+            size:
+              type: integer
+              description: Tamanho da Sala em m²
+              example: 50
+            documents_ok:
+              type: boolean
+              description: Documentação em ordem
+              example: true
+            condominium_fee:
+              type: number
+              description: Taxa de condomínio
+              example: 200.50
+            iptu:
+              type: number
+              description: Valor do IPTU
+              example: 1500.00
+            number_of_bathrooms:
+              type: integer
+              description: Número de banheiros
+              example: 2
+            has_parking_space:
+              type: boolean
+              description: Possui vaga de estacionamento
+              example: true
+            has_reception:
+              type: boolean
+              description: Possui recepção
+              example: true
+            doctors_office:
+              type: boolean
+              description: É elegível para consultório médico
+              example: true
+    responses:
+      200:
+        description: Sala atualizada com sucesso
+      400:
+        description: Requisição inválida
+      404:
+        description: Sala não encontrada
+    """
+    if not request.is_json:
+        return jsonify({"error": "Request must be JSON"}), 400
+
+    data = request.get_json()
+    result = update_room(room_id, data)
+
+    if result is None:
+        return jsonify({"error": "Room not found"}), 404
+
+    return jsonify({"message": "Room updated successfully", "room_id": result}), 200
+
+
 @app.route("/delete-room", methods=["DELETE"])
 def deletar_sala():
     """
