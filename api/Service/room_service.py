@@ -1,5 +1,5 @@
-from api.Models.room import Room
-from api.Repository.roomDb import *
+from Models.room import Room
+from Repository.roomDb import *
 from flask import jsonify
 
 

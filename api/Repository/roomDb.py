@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, Column, Integer, String, Boolean, Float
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from api.Models.room import Room
+from Models.room import Room
 
 Base = declarative_base()
 engine = create_engine('sqlite:///na-hora-certa.db')
